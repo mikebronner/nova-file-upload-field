@@ -13,3 +13,5 @@ The following features set this form field appart from others:
 ## TODO
 - [ ] Add index page field variant
 - [ ] Add detail page field variant
+- [ ] Add video and screenshots, along with usage documentation
+- [ ] Add functional tests, if possible
