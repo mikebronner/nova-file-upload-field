@@ -9,3 +9,7 @@ The following features set this form field appart from others:
 - image previews
 - drag-and-drop file attachment (file upload fields do this already by default)
 - anything dragged onto it is available in the request as an `UploadedFile`
+
+## TODO
+- [ ] Add index page field variant
+- [ ] Add detail page field variant
