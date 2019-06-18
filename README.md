@@ -5,13 +5,9 @@ I needed a file upload field for a few of my projects, with the versatile functi
 
 ## Functionality
 The following features set this form field appart from others:
-- drag-and-drop URL attachment that works in Safari and Chrome
+- drag-and-drop of URLs
+- drag-and-drop of links that point to files
+- drag-and-drop of web files (any web element with a src attribute that points to a file)
+- drag-and-dop of system files
 - image previews
-- drag-and-drop file attachment (file upload fields do this already by default)
-- anything dragged onto it is available in the request as an `UploadedFile`
-
-## TODO
-- [ ] Add index page field variant
-- [ ] Add detail page field variant
-- [ ] Add video and screenshots, along with usage documentation
-- [ ] Add functional tests, if possible
+- any uploadable items (files, URLs, links) are available in the request as an `UploadedFile` object in Laravel's Request object
