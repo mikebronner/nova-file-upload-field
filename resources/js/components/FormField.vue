@@ -15,9 +15,15 @@ export default {
 
     computed: {
         fileName: function () {
-            const maxLength = 45;
-            let fileName = this.fileUri;
-            let fileLength = fileName.length;
+            let fileName = this.fileUri.split('\\').pop().split('/').pop();
+            const fileLength = fileName.length;
+            let maxLength = 45;
+
+            if (this.$refs.text) {
+                maxLength = this.$refs.text.clientWidth
+                    / parseFloat(getComputedStyle(document.querySelector('body'))['font-size'])
+                    * 1.25;
+            }
 
             if (fileLength > maxLength) {
                 fileName = "&hellip;" + fileName.substring(fileLength - maxLength);
@@ -94,7 +100,7 @@ export default {
                 reader.onload = function (event) {
                     var imageData = event.target.result;
                     self.imagePreviewData = "";
-console.log(imageData);
+
                     if (imageData.indexOf("data:;base64,") === 0) {
                         self.imagePreviewData = "";
                         imageData = atob(imageData.replace("data:;base64,", ""));
