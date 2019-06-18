@@ -19,10 +19,10 @@ export default {
             const fileLength = fileName.length;
             let maxLength = 45;
 
-            if (this.$refs.text) {
-                maxLength = this.$refs.text.clientWidth
+            if (this.$refs[this.field.name + '-text']) {
+                maxLength = this.$refs[this.field.name + '-text'].clientWidth
                     / parseFloat(getComputedStyle(document.querySelector('body'))['font-size'])
-                    * 1.25;
+                    * 1.333;
             }
 
             if (fileLength > maxLength) {
@@ -42,8 +42,8 @@ export default {
     methods: {
         captureFile: function (event) {
             if (event.dataTransfer.files.length > 0) {
-                this.$refs.file.files = event.dataTransfer.files;
-                this.$refs.file.dispatchEvent(new Event('change', { 'bubbles': true }));
+                this.$refs[this.field.name + '-file'].files = event.dataTransfer.files;
+                this.$refs[this.field.name + '-file'].dispatchEvent(new Event('change', { 'bubbles': true }));
 
                 return;
             }
@@ -128,7 +128,7 @@ export default {
         },
 
         showFileUploadDialogue: function () {
-            this.$refs.file.click();
+            this.$refs[this.field.name + '-file'].click();
         },
     },
 }
@@ -143,8 +143,7 @@ export default {
             <div class="relative">
                 <form ref="testform">
                 <input
-                    :id="field.name"
-                    ref="text"
+                    :ref="field.name + '-text'"
                     type="text"
                     class="target bold text-center w-full form-control form-input form-input-bordered border-2 border-dashed h-64"
                     :class="errorClasses"
@@ -156,9 +155,8 @@ export default {
                 >
                 </form>
                 <input
-                    id="file"
                     @change="previewImage"
-                    ref="file"
+                    :ref="field.name + '-file'"
                     type="file"
                     class="hidden"
                 >
