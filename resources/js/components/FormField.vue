@@ -22,7 +22,7 @@ export default {
             if (this.$refs[this.field.name + '-text']) {
                 maxLength = this.$refs[this.field.name + '-text'].clientWidth
                     / parseFloat(getComputedStyle(document.querySelector('body'))['font-size'])
-                    * 1.333;
+                    * 1.25;
             }
 
             if (fileLength > maxLength) {
@@ -40,32 +40,73 @@ export default {
     },
 
     methods: {
-        captureFile: function (event) {
-            if (event.dataTransfer.files.length > 0) {
-                this.$refs[this.field.name + '-file'].files = event.dataTransfer.files;
-                this.$refs[this.field.name + '-file'].dispatchEvent(new Event('change', { 'bubbles': true }));
 
-                return;
+        processUriList: function (event) {
+            const data = event.dataTransfer.getData("text/uri-list");
+
+            if ((data || false) === false) {
+                return false;
             }
 
+            this.handleChange(data);
+
+            return true;
+        },
+
+        processText: function (event) {
+            const data = event.dataTransfer.getData("text");
+
+            if ((data || false) === false) {
+                return false;
+            }
+
+            this.handleChange(data);
+
+            return true;
+        },
+
+        processHtmlText: function (event) {
             const data = event.dataTransfer.getData("text/html");
             const sourceRegExp = /src=['"](.*?)['"]/;
             const match = sourceRegExp.exec(data);
 
             if (match && match.length > 0) {
-                this.fileUri = match[1];
-                this.imagePreviewData = match[1];
-                this.value = match[1];
+                this.handleChange(match[1]);
 
-                return;
+                return true;
             }
 
-            if (event.dataTransfer.getData("text").length > 0) {
-                this.fileUri = event.dataTransfer.getData("text");
-                this.imagePreviewData = event.dataTransfer.getData("text");
-                this.value = event.dataTransfer.getData("text");
+            return false;
+        },
 
-                return;
+        processFiles: function (event) {
+            if (event.dataTransfer.files.length > 0) {
+                this.$refs[this.field.name + '-file'].files = event.dataTransfer.files;
+                this.$refs[this.field.name + '-file'].dispatchEvent(new Event('change', { 'bubbles': true }));
+
+                return true;
+            }
+
+            return false;
+        },
+
+        captureFile: function (event) {
+            let result = false;
+
+            if (! result) {
+                result = this.processUriList(event);
+            }
+
+            if (! result) {
+                this.processText(event);
+            }
+
+            if (! result) {
+                this.processHtmlText(event);
+            }
+
+            if (! result) {
+                this.processFiles(event);
             }
         },
 
@@ -80,7 +121,9 @@ export default {
         },
 
         handleChange: function (value) {
-            this.value = value
+            this.fileUri = value;
+            this.imagePreviewData = value;
+            this.value = value;
         },
 
         previewImage: function (event) {
