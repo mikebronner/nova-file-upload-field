@@ -1,10 +1,11 @@
 <?php namespace GeneaLabs\NovaFileUploadField;
 
+use CFPropertyList\CFPropertyList;
+use Illuminate\Http\UploadedFile;
 use Laravel\Nova\Fields\Deletable;
 use Laravel\Nova\Fields\File;
-use Illuminate\Http\UploadedFile;
-use ReflectionProperty;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use ReflectionProperty;
 
 class FileUpload extends File
 {
@@ -15,20 +16,12 @@ class FileUpload extends File
 
     protected function fillAttribute(NovaRequest $request, $requestAttribute, $model, $attribute)
     {
-        if ($request->filled($attribute)) {
-            $tempFile = tmpfile();
-            $tempPath = stream_get_meta_data($tempFile)['uri'];
-            file_put_contents($tempPath, file_get_contents($request->input($attribute)));
-            $uploadFile = new UploadedFile($tempPath, $request->input($attribute));
+        $request = $this->convertWebloc($request, $requestAttribute);
 
-            $request->merge([$attribute => $uploadFile]);
-            $fileBag = $request->files;
-            $fileBag->set($attribute, $uploadFile);
-            $request->files = $fileBag;
-            $refProperty   = new ReflectionProperty(get_class($request), "convertedFiles");
-            $refProperty->setAccessible(true);
-            $refProperty->setValue($request, null);
-            app()->instance(get_class($request), $request);
+        if (is_string($request->$requestAttribute)) {
+            $uploadedFile = $this->createUploadedFileFromUrl($request->$requestAttribute);
+            $request = $this->updateRequestWithUploadedFile($request, $uploadedFile, $requestAttribute);
+            $this->updateRequestWithUploadedFile(request(), $uploadedFile, $requestAttribute);
         }
 
         if (is_null($file = $request->file($requestAttribute))) {
@@ -60,5 +53,47 @@ class FileUpload extends File
                 );
             };
         }
+    }
+
+    protected function convertWebloc(NovaRequest $request, string $requestAttribute)
+    {
+        if ($request->hasFile($requestAttribute)
+            && $request->file($requestAttribute)->getClientOriginalExtension() === "webloc"
+        ) {
+            $content = $request->file($requestAttribute)->get();
+            $parser = new CFPropertyList;
+            $parser->parseBinary($content);
+            $plist = $parser->toArray();
+            $request->$requestAttribute = $plist["URL"];
+        }
+
+        return $request;
+    }
+
+    protected function createUploadedFileFromUrl(string $url) : UploadedFile
+    {
+        $tempPath = sys_get_temp_dir() . "/" . str_random();
+        touch($tempPath);
+        file_put_contents($tempPath, file_get_contents($url));
+
+        return new UploadedFile($tempPath, $url);
+    }
+
+    protected function updateRequestWithUploadedFile(
+        $request,
+        UploadedFile $uploadFile,
+        string $requestAttribute
+    ) {
+            $request->merge([$requestAttribute => $uploadFile]);
+            $fileBag = $request->files;
+            $fileBag->set($requestAttribute, $uploadFile);
+            $request->files = $fileBag;
+            $request->$requestAttribute = $uploadFile;
+            $refProperty   = new ReflectionProperty(get_class($request), "convertedFiles");
+            $refProperty->setAccessible(true);
+            $refProperty->setValue($request, null);
+            app()->instance(get_class($request), $request);
+
+            return $request;
     }
 }
