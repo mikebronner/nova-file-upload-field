@@ -4,6 +4,8 @@
 [![Packagist](https://img.shields.io/packagist/dt/GeneaLabs/nova-file-upload-field.svg)](https://packagist.org/packages/genealabs/nova-file-upload-field)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/GeneaLabs/nova-file-upload-field/master/LICENSE)
 
+![nova-file-upload-field-header](https://user-images.githubusercontent.com/1791050/59730775-7efdf400-91f8-11e9-90f4-cd85866be75f.png)
+
 ## Impetus
 I needed a file upload field for a few of my projects, with the versatile functionality that worked across all modern browsers in various use-cases. Safari has issues with drag-dropping URLs (it converts them to `webloc` files), different browsers have different little quircks in how they behave (Safari triggers change on input fields when they are updated programatically, Chrome does not in the case of changing files on a file input field).
 
