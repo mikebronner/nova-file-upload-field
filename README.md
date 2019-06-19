@@ -15,3 +15,33 @@ The following features set this form field appart from others:
 - drag-and-dop of system files
 - image previews
 - any uploadable items (files, URLs, links) are available in the request as an `UploadedFile` object in Laravel's Request object
+
+## Commitment to Quality
+During package development I try as best as possible to embrace good design and development practices, to help ensure that this package is as good as it can
+be. My checklist for package development includes:
+
+-   ✅ Achieve as close to 100% code coverage as possible using unit tests.
+-   ✅ Eliminate any issues identified by SensioLabs Insight and Scrutinizer.
+-   ✅ Be fully PSR1, PSR2, and PSR4 compliant.
+-   ✅ Include comprehensive documentation in README.md.
+-   ✅ Provide an up-to-date CHANGELOG.md which adheres to the format outlined
+    at <http://keepachangelog.com>.
+-   ✅ Have no PHPMD or PHPCS warnings throughout all code.
+
+## Contributing
+Please observe and respect all aspects of the included Code of Conduct <https://github.com/GeneaLabs/laravel-model-caching/blob/master/CODE_OF_CONDUCT.md>.
+
+### Reporting Issues
+When reporting issues, please fill out the included template as completely as
+possible. Incomplete issues may be ignored or closed if there is not enough
+information included to be actionable.
+
+### Submitting Pull Requests
+Please review the Contribution Guidelines <https://github.com/GeneaLabs/laravel-model-caching/blob/master/CONTRIBUTING.md>.
+Only PRs that meet all criterium will be accepted.
+
+## ❤️ Open-Source Software - Give ⭐️
+We have included the awesome `symfony/thanks` composer package as a dev dependency. Let your OS package maintainers know you appreciate them by starring the packages you use. Simply run composer thanks after installing this package. (And not to worry, since it's a dev-dependency it won't be installed in your
+live environment.)
+
+Additionally, if you have found this package to help in your projects, we ask you consider [donating](https://www.patreon.com/mikebronner), even if it's just a coffee's worth. It helps keep the project going. Thank you!
