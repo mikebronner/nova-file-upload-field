@@ -183,12 +183,12 @@ export default {
         :errors="errors"
     >
         <template slot="field">
-            <div class="relative">
+            <div class="relative nova-file-upload-field">
                 <form ref="testform">
                 <input
                     :ref="field.name + '-text'"
                     type="text"
-                    class="target bold text-center w-full form-control form-input form-input-bordered border-2 border-dashed h-64"
+                    class="target bg-40 bold text-center w-full form-control form-input form-input-bordered border-2 border-dashed h-64"
                     :class="errorClasses"
                     :placeholder="placeholderText"
                     @dragover.stop.prevent=""

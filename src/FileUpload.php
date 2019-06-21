@@ -12,7 +12,46 @@ class FileUpload extends File
     use Deletable;
 
     public $component = 'nova-file-upload-field';
+    public $showOnIndex = true;
 
+    public function __construct($name, $attribute = null, $disk = 'public', $storageCallback = null)
+    {
+        parent::__construct($name, $attribute, $disk, $storageCallback);
+
+        $this->disk = $disk;
+
+        $this->prepareStorageCallback($storageCallback);
+
+        $this->thumbnail(function () {
+            return $this->value
+                ? app("filesystem")
+                    ->disk($this->disk)
+                    ->url($this->value)
+                : null;
+        })->preview(function () {
+            return $this->value
+                ? app("filesystem")
+                    ->disk($this->disk)
+                    ->url($this->value)
+                : null;
+        })->download(function ($request, $model) {
+            $name = $this->originalNameColumn
+                ? $model->{$this->originalNameColumn}
+                : null;
+
+            return app("filesystem")
+                ->disk($this->disk)
+                ->download($this->value, $name);
+        })->delete(function () {
+            if ($this->value) {
+                app("filesystem")
+                    ->disk($this->disk)
+                    ->delete($this->value);
+
+                return $this->columnsThatShouldBeDeleted();
+            }
+        });
+    }
 
     protected function fillAttribute(NovaRequest $request, $requestAttribute, $model, $attribute)
     {
