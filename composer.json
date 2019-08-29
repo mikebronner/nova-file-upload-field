@@ -13,8 +13,7 @@
         }
     ],
     "require": {
-        "php": ">=7.1.0",
-        "illuminate/http": "5.8.*",
+        "illuminate/http": "5.8 - 6.0",
         "laravel/nova": "2.*",
         "rodneyrehm/plist": "*",
         "symfony/thanks": "*"
