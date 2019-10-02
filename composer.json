@@ -13,8 +13,8 @@
         }
     ],
     "require": {
-        "illuminate/http": "5.8 - 6.0",
-        "laravel/nova": "2.*",
+        "illuminate/http": "^5.8|^6.0",
+        "laravel/nova": "*",
         "rodneyrehm/plist": "*",
         "symfony/thanks": "*"
     },
