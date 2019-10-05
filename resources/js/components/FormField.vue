@@ -163,8 +163,8 @@ export default {
         },
 
         setInitialValue: function () {
-            const originalImage = this.field.value
-                ? "/" + this.field.value
+            const originalImage = this.field.previewUrl
+                ? this.field.previewUrl
                 : "";
             this.imagePreviewData = originalImage;
             this.fileUri = originalImage;
