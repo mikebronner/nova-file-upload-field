@@ -4,7 +4,7 @@
 [![Packagist](https://img.shields.io/packagist/dt/GeneaLabs/nova-file-upload-field.svg)](https://packagist.org/packages/genealabs/nova-file-upload-field)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/GeneaLabs/nova-file-upload-field/master/LICENSE)
 
-![nova-file-upload-field-header](https://user-images.githubusercontent.com/1791050/59730775-7efdf400-91f8-11e9-90f4-cd85866be75f.png)
+![File Upload Field for Laravel Nova](https://repository-images.githubusercontent.com/192123976/6392e900-91f8-11e9-88b5-74365e97af5a)
 
 ## Supporting This Package
 This is an MIT-licensed open source project with its ongoing development made possible by the support of the community. If you'd like to support this, and our other packages, please consider [becoming a backer or sponsor on Patreon](https://www.patreon.com/mikebronner).
