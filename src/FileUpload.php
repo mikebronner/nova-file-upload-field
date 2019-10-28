@@ -9,7 +9,7 @@ use ReflectionProperty;
 
 class FileUpload extends File
 {
-    use Deletable;
+    use Deletable; 
 
     public $component = 'nova-file-upload-field';
     public $showOnIndex = true;
@@ -67,7 +67,7 @@ class FileUpload extends File
             return;
         }
 
-        $result = call_user_func($this->storageCallback, $request, $model);
+        $result = call_user_func($this->storageCallback, $request, $model, $attribute, $requestAttribute);
 
         if ($result === true) {
             return;
