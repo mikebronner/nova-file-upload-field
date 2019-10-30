@@ -14,7 +14,7 @@ export default {
             loading: false,
             missing: false,
             deleted: false,
-            previewUrl: '/' + this.field.value,
+            previewUrl: this.field.previewUrl,
         };
     },
 
@@ -53,7 +53,11 @@ export default {
     <panel-item :field="field">
         <div slot="value">
             <template v-if="shouldShowLoader">
-                <image-loader :src="previewUrl" class="z-10 max-w-xs nova-file-upload-field" @missing="(value) => missing = value" />
+                <image-loader
+                    :src="previewUrl"
+                    class="z-10 max-w-xs nova-file-upload-field"
+                    @missing="(value) => missing = value"
+                ></image-loader>
             </template>
 
             <template v-if="field.value && ! previewUrl">
