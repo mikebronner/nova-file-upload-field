@@ -25,7 +25,6 @@ class FileUpload extends File
                     : null;
             })
             ->preview(function () {
-                return "test";
                 return $this->value
                     ? app("filesystem")
                         ->disk($this->disk)
