@@ -2,6 +2,7 @@
 
 use CFPropertyList\CFPropertyList;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Str;
 use Laravel\Nova\Fields\File;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use ReflectionProperty;
@@ -109,7 +110,7 @@ class FileUpload extends File
 
     protected function createUploadedFileFromUrl(string $url) : UploadedFile
     {
-        $tempPath = sys_get_temp_dir() . "/" . str_random();
+        $tempPath = sys_get_temp_dir() . "/" . Str::random();
         touch($tempPath);
         file_put_contents($tempPath, file_get_contents($url));
 

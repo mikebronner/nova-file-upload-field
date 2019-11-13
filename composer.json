@@ -14,6 +14,7 @@
     ],
     "require": {
         "illuminate/http": "^5.8|^6.0",
+        "illuminate/support": "^5.8|^6.0",
         "laravel/nova": "*",
         "rodneyrehm/plist": "*",
         "symfony/thanks": "*"
