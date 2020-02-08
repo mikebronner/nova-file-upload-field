@@ -21,6 +21,54 @@ The following features set this form field appart from others:
 - image previews
 - any uploadable items (files, URLs, links) are available in the request as an `UploadedFile` object in Laravel's Request object
 
+## Installation
+```sh
+composer require genealabs/nova-file-upload-field
+```
+
+## Usage
+Add it as a field in your Nova resource, for example:
+```php
+<?php namespace App\Nova;
+
+use GeneaLabs\NovaFileUploadField\FileUpload;
+use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
+
+class Image extends Resource
+{
+    public static $model = 'App\Image';
+    public static $title = 'title';
+    public static $search = [
+        "id",
+        "description",
+        "title",
+    ];
+
+    public function fields(Request $request)
+    {
+        return [
+            ID::make()
+                ->sortable(),
+            Text::make("Title", "title")
+                ->sortable()
+                ->rules("required", "max:255"),
+            FileUpload::make("Image", "path")
+                ->thumbnail(function ($image) {
+                    return $image
+                        ? asset($image)
+                        : '';
+                })
+                ->disk("tenant")
+                ->path("media")
+                ->prunable(),
+            Textarea::make("Description"),
+        ];
+    }
+}
+```
+
 ## Commitment to Quality
 During package development I try as best as possible to embrace good design and development practices, to help ensure that this package is as good as it can
 be. My checklist for package development includes:
