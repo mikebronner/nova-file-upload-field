@@ -13,11 +13,11 @@
         }
     ],
     "require": {
-        "illuminate/http": "^5.8|^6.0|^7.0",
-        "illuminate/support": "^5.8|^6.0|^7.0",
-        "laravel/nova": "*",
-        "rodneyrehm/plist": "*",
-        "symfony/thanks": "*"
+        "illuminate/http": "^7.0",
+        "illuminate/support": "^7.0",
+        "laravel/nova": "^3.0",
+        "rodneyrehm/plist": "^2.0",
+        "symfony/thanks": "^1.2"
     },
     "autoload": {
         "psr-4": {
