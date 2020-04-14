@@ -190,10 +190,11 @@ export default {
                     type="text"
                     class="target bg-40 bold text-center w-full form-control form-input form-input-bordered border-2 border-dashed h-64"
                     :class="errorClasses"
-                    :placeholder="placeholderText"
+                    :placeholder="__(placeholderText)"
                     @dragover.stop.prevent=""
                     @drop.stop.prevent="captureFile"
                     @click="showFileUploadDialogue()"
+                    @paste.prevent
                     :style="'background-image: url(' + imagePreviewData + ')'"
                 >
                 </form>
