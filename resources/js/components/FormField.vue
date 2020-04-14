@@ -35,7 +35,7 @@ export default {
         placeholderText: function () {
             return this.imagePreviewData.length > 0
                 ? ""
-                : "Drop file, paste URL, or click to browse.";
+                : "Drag & drop a file, or click to browse.";
         },
     },
 
