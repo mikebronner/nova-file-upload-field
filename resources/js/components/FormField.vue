@@ -197,7 +197,11 @@ export default {
                     @paste.prevent
                     :style="'background-image: url(' + imagePreviewData + ')'"
                 >
-                <div v-if="field.helpText" class="help-text mt-2" v-text="field.helpText"></div>
+                <div 
+                    v-if="field.helpText" 
+                    class="help-text mt-2" 
+                    v-text="field.helpText">
+                </div>
                 </form>
                 <input
                     @change="previewImage"
