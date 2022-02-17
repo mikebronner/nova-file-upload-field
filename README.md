@@ -9,6 +9,10 @@
 ## Supporting This Package
 This is an MIT-licensed open source project with its ongoing development made possible by the support of the community. If you'd like to support this, and our other packages, please consider [becoming a backer or sponsor on Patreon](https://www.patreon.com/mikebronner).
 
+We thank the following sponsors for their generosity, please take a moment to check them out:
+
+- [LIX](https://lix-it.com)
+
 ## Impetus
 I needed a file upload field for a few of my projects, with the versatile functionality that worked across all modern browsers in various use-cases. Safari has issues with drag-dropping URLs (it converts them to `webloc` files), different browsers have different little quircks in how they behave (Safari triggers change on input fields when they are updated programatically, Chrome does not in the case of changing files on a file input field).
 
