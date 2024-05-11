@@ -13,8 +13,8 @@
         }
     ],
     "require": {
-        "illuminate/http": "^10.0",
-        "illuminate/support": "^10.0",
+        "illuminate/http": "^10.0|^11.0",
+        "illuminate/support": "^10.0|^11.0",
         "laravel/nova": "^4.0",
         "rodneyrehm/plist": "^2.0",
         "symfony/thanks": "^1.2"
